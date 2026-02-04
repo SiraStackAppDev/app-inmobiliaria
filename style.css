@@ -1,0 +1,153 @@
+/* =========================================
+   CONFIGURACIÓN GENERAL
+   ========================================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f3460; /* Azul oscuro de fondo */
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* =========================================
+   CONTENEDOR DE LA APP (Cajas)
+   ========================================= */
+.app-game {
+    background: #1a1a2e; /* Fondo de la tarjeta */
+    width: 100%;
+    max-width: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding-bottom: 20px;
+    animation: fadeIn 0.5s ease; /* Efecto de entrada suave */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   CABECERAS (Headers)
+   ========================================= */
+.game-header {
+    background: linear-gradient(135deg, #00d2ff, #3a7bd5); /* Azul por defecto */
+    padding: 25px 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.game-header h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.game-header p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* =========================================
+   SISTEMA DE XP Y RANGO
+   ========================================= */
+.user-stats {
+    background: rgba(0,0,0,0.3);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 0.8rem;
+}
+
+.exp-bar {
+    background: #444;
+    height: 8px;
+    border-radius: 4px;
+    margin: 8px 0;
+    overflow: hidden;
+}
+
+#exp-fill {
+    background: #FFD700; /* Color oro para la XP */
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/* =========================================
+   CAJAS DE CONTENIDO (Secciones)
+   ========================================= */
+.level-box {
+    padding: 0 20px;
+}
+
+.level-box h3 {
+    color: #00d2ff;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+/* Formulario e Inputs */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #16213e;
+    color: white;
+    box-sizing: border-box; /* Para que el padding no ensanche el input */
+}
+
+input:focus {
+    outline: 2px solid #00d2ff;
+    background: #1f4068;
+}
+
+/* Checklist */
+.doc-checklist {
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 10px;
+    line-height: 2;
+}
+
+/* =========================================
+   BOTONES
+   ========================================= */
+button {
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* =========================================
+   UTILIDADES
+   ========================================= */
+.hidden {
+    display: none !important;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 20px 0;
+}
