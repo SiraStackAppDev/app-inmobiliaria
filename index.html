@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Inmobiliaria - Guía Ana</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f2f5; margin: 0; display: flex; flex-direction: column; align-items: center; padding-bottom: 80px; }
+        header { width: 100%; max-width: 500px; background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; text-align: center; padding: 25px 0; border-radius: 0 0 20px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .container { width: 90%; max-width: 400px; }
+        .modulo { background: white; border-radius: 15px; margin-bottom: 15px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-left: 8px solid; }
+        
+        #m1 { border-left-color: #007bff; }
+        #m2 { border-left-color: #dc3545; }
+        #m3 { border-left-color: #6f42c1; }
+        #m4 { border-left-color: #e83e8c; }
+
+        h2 { margin-top: 0; font-size: 1.1rem; color: #333; }
+        input { width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 10px; }
+        .check-item { display: flex; align-items: center; margin: 8px 0; font-size: 0.9rem; }
+        input[type="checkbox"] { margin-right: 10px; transform: scale(1.2); }
+        
+        .btn-send { background-color: #1e3a8a; color: white; border: none; padding: 10px; border-radius: 5px; width: 100%; cursor: pointer; margin-top: 10px; font-weight: bold; }
+        .btn-whatsapp { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; padding: 15px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 1000; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🏢 ANA & EQUIPO</h1>
+        <p>Guía de Éxito para Nuevos Comerciales</p>
+    </header>
+
+    <div class="container">
+        <div class="modulo" id="m1">
+            <h2>Módulo 1: Honorarios</h2>
+            <input type="number" id="precio" placeholder="Precio de venta (€)" oninput="calcular()">
+            <div id="resHonorarios" style="font-weight:bold; color:#007bff; margin-bottom:10px;">Comisión (5%): 0€</div>
+            <button class="btn-send" onclick="enviarM1()">Enviar Cálculo a Ana</button>
+        </div>
+
+        <div class="modulo" id="m2">
+            <h2>Módulo 2: Valoración (ACM)</h2>
+            <input type="number" id="v1" placeholder="Ref. Vendido 1 (€)">
+            <input type="number" id="v2" placeholder="Ref. Vendido 2 (€)">
+            <button class="btn-send" onclick="enviarM2()">Enviar Valoración a Ana</button>
+        </div>
+
+        <div class="modulo" id="m3">
+            <h2>Módulo 3: Marketing</h2>
+            <div class="check-item"><input type="checkbox" id="foto1"> Persianas abiertas</div>
+            <div class="check-item"><input type="checkbox" id="foto2"> Tapas WC bajadas</div>
+            <div class="check-item"><input type="checkbox" id="foto3"> Camas impecables</div>
+            <button class="btn-send" onclick="enviarM3()">Enviar Checklist a Ana</button>
+        </div>
+
+        <div class="modulo" id="m4">
+            <h2>Módulo 4: Filtro de Cliente</h2>
+            <input type="text" id="nombreC" placeholder="Nombre del cliente">
+            <div class="check-item"><input type="checkbox" id="f1"> ¿Financiación OK?</div>
+            <div class="check-item"><input type="checkbox" id="f2"> ¿Vende para comprar?</div>
+            <button class="btn-send" onclick="enviarM4()">Enviar Filtro a Ana</button>
+        </div>
+    </div>
+
+    <a href="#" class="btn-whatsapp" id="ws-link">💬 Contactar con Ana</a>
+
+    <script>
+        // ¡IMPORTANTE! Cambia esto por el número de Ana (ej: 34600112233)
+        const TEL_ANA = "34600000000"; 
+        document.getElementById('ws-link').href = "https://wa.me/" + TEL_ANA;
+
+        function calcular() {
+            let p = document.getElementById('precio').value;
+            document.getElementById('resHonorarios').innerText = "Comisión (5%): " + (p * 0.05).toLocaleString() + "€";
+        }
+
+        function enviarM1() {
+            let p = document.getElementById('precio').value;
+            let h = p * 0.05;
+            window.open(`https://wa.me/${TEL_ANA}?text=Hola Ana! Cálculo de Honorarios:%0A- Precio: ${p}€%0A- Comisión: ${h}€`);
+        }
+
+        function enviarM2() {
+            let v1 = document.getElementById('v1').value;
+            let v2 = document.getElementById('v2').value;
+            window.open(`https://wa.me/${TEL_ANA}?text=Hola Ana! Aquí mi Valoración ACM:%0A- Ref1: ${v1}€%0A- Ref2: ${v2}€`);
+        }
+
+        function enviarM3() {
+            let c1 = document.getElementById('foto1').checked ? "✅" : "❌";
+            let c2 = document.getElementById('foto2').checked ? "✅" : "❌";
+            let c3 = document.getElementById('foto3').checked ? "✅" : "❌";
+            window.open(`https://wa.me/${TEL_ANA}?text=Hola Ana! Checklist de Marketing listo:%0A- Persianas: ${c1}%0A- WC: ${c2}%0A- Camas: ${c3}`);
+        }
+
+        function enviarM4() {
+            let n = document.getElementById('nombreC').value;
+            let f1 = document.getElementById('f1').checked ? "SÍ" : "NO";
+            let f2 = document.getElementById('f2').checked ? "SÍ" : "NO";
+            window.open(`https://wa.me/${TEL_ANA}?text=Hola Ana! Filtro del cliente ${n}:%0A- Financiación: ${f1}%0A- Vende para comprar: ${f2}`);
+        }
+    </script>
+</body>
+</html>
