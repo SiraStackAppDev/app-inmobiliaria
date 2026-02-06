@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iad Academy | Guía de Supervivencia</title>
+    <title>iad Academy</title>
+    <!-- Scripts externos necesarios -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -83,7 +84,7 @@
 </head>
 <body class="pb-24">
 
-    <!-- Header Corporativo -->
+    <!-- Header -->
     <header class="iad-gradient p-6 sticky top-0 z-40 border-b border-blue-900 shadow-lg">
         <div class="max-w-4xl mx-auto">
             <div class="flex justify-between items-center mb-4">
@@ -105,17 +106,16 @@
     </header>
 
     <main class="max-w-4xl mx-auto p-4 space-y-8">
-        
-        <!-- Navegación por Semanas -->
+        <!-- Navegación -->
         <nav class="flex overflow-x-auto border-b border-gray-700 no-scrollbar space-x-6 text-sm font-bold uppercase py-2">
             <button onclick="changeTab(1)" id="btn-tab1" class="tab-active whitespace-nowrap pb-2">🚀 Semana 1</button>
             <button onclick="changeTab(2)" id="btn-tab2" class="whitespace-nowrap pb-2 text-gray-500">🛡️ Semana 2</button>
             <button onclick="changeTab(3)" id="btn-tab3" class="whitespace-nowrap pb-2 text-gray-500">🔍 Semanas 3-4</button>
             <button onclick="changeTab(4)" id="btn-tab4" class="whitespace-nowrap pb-2 text-gray-500">🤝 Semanas 5-6</button>
-            <button onclick="changeTab(5)" id="btn-tab5" class="whitespace-nowrap pb-2 text-gray-500">🏆 Mes 6</button>
+            <button onclick="changeTab(5)" id="btn-tab5" class="whitespace-nowrap pb-2 text-gray-500">🏆 Semana 7</button>
         </nav>
 
-        <!-- CONTENIDO SEMANA 1 -->
+        <!-- Contenido Semana 1 -->
         <section id="content-tab1" class="space-y-6">
             <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-xl">
                 <h2 class="text-xl font-bold mb-4 flex items-center text-orange-400">
@@ -132,11 +132,7 @@
                     </div>
                     <div class="task-item flex items-center p-3 bg-gray-900/50 rounded-xl border border-gray-700" onclick="toggleTask(this)">
                         <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
-                        <span class="text-sm">Detallar y explicar Código Deontológico</span>
-                    </div>
-                    <div class="task-item flex items-center p-3 bg-gray-900/50 rounded-xl border border-gray-700" onclick="toggleTask(this)">
-                        <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
-                        <span class="text-sm font-bold text-orange-400">iad Shop: Pedir Welcome Pack</span>
+                        <span class="text-sm text-orange-400">iad Shop: Pedir Welcome Pack</span>
                     </div>
                 </div>
             </div>
@@ -148,107 +144,75 @@
                     <span class="bg-blue-900 text-blue-200 px-3 py-1 rounded-full text-xs font-bold" id="counter">0/50</span>
                 </div>
                 <div class="flex space-x-2 mb-6">
-                    <input type="text" id="nameInput" placeholder="Nombre del contacto..." class="flex-1 bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-[#FF6600] text-white">
-                    <button onclick="addName()" class="bg-[#FF6600] text-white px-6 rounded-xl font-black hover:scale-105 transition shadow-lg">OK</button>
+                    <input type="text" id="nameInput" placeholder="Nombre..." class="flex-1 bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500">
+                    <button onclick="addName()" class="bg-[#FF6600] px-6 rounded-xl font-bold">OK</button>
                 </div>
                 <div class="grid grid-cols-5 sm:grid-cols-10 gap-2" id="bubbleGrid"></div>
             </div>
 
-            <button onclick="showSuccessModal(1)" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-black py-5 rounded-2xl flex items-center justify-center space-x-3 shadow-2xl transition-all active:scale-95">
-                <i class="fas fa-certificate text-xl"></i>
-                <span>VALIDAR SEMANA 1</span>
-            </button>
+            <button onclick="showSuccessModal(1)" class="w-full bg-blue-700 py-5 rounded-2xl font-bold shadow-xl">VALIDAR SEMANA 1</button>
         </section>
 
-        <!-- SECCIONES 2, 3, 4 y 5 -->
+        <!-- Secciones 2-5 -->
         <section id="content-tab2" class="hidden space-y-6">
-             <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-xl">
-                <h2 class="text-xl font-bold mb-4 flex items-center text-blue-400">
-                    <i class="fas fa-phone-volume mr-3"></i> Semana 2: Phoning P2i
-                </h2>
-                <div class="space-y-3">
-                    <div class="task-item flex items-center p-4 bg-gray-900 rounded-xl border-l-4 border-orange-500" onclick="toggleTask(this)">
-                        <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
-                        <div>
-                            <p class="font-bold text-sm text-orange-400">Sesión de Phoning P2i</p>
-                            <p class="text-xs text-gray-400 italic">Primeras llamadas acompañadas.</p>
-                        </div>
-                    </div>
+            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700">
+                <h2 class="text-xl font-bold text-blue-400 mb-4">Semana 2: Phoning</h2>
+                <div class="task-item p-4 bg-gray-900 rounded-xl flex items-center" onclick="toggleTask(this)">
+                    <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
+                    <span>Sesión de Phoning P2i</span>
                 </div>
             </div>
-            <button onclick="showSuccessModal(2)" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-black py-5 rounded-2xl flex items-center justify-center space-x-3 shadow-2xl transition-all active:scale-95">
-                <i class="fas fa-certificate text-xl"></i>
-                <span>VALIDAR SEMANA 2</span>
-            </button>
+            <button onclick="showSuccessModal(2)" class="w-full bg-blue-700 py-5 rounded-2xl font-bold shadow-xl">VALIDAR SEMANA 2</button>
         </section>
 
         <section id="content-tab3" class="hidden space-y-6">
-            <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-xl">
-                <h2 class="text-xl font-bold mb-4 flex items-center text-purple-400">
-                    <i class="fas fa-search-location mr-3"></i> Semanas 3-4: Herramientas
-                </h2>
-                <div class="grid gap-3">
-                    <div class="task-item p-3 bg-gray-900 rounded-xl border border-gray-700 flex items-center" onclick="toggleTask(this)">
-                        <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
-                        <span class="text-sm font-bold">Herramienta A2C (Valoración)</span>
-                    </div>
+            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700">
+                <h2 class="text-xl font-bold text-purple-400 mb-4">Herramientas</h2>
+                <div class="task-item p-4 bg-gray-900 rounded-xl flex items-center" onclick="toggleTask(this)">
+                    <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
+                    <span>Herramienta A2C (Valoración)</span>
                 </div>
             </div>
-            <button onclick="showSuccessModal(3)" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-black py-5 rounded-2xl flex items-center justify-center space-x-3 shadow-2xl transition-all active:scale-95">
-                <i class="fas fa-certificate text-xl"></i>
-                <span>VALIDAR BLOQUE 3-4</span>
-            </button>
+            <button onclick="showSuccessModal(3)" class="w-full bg-blue-700 py-5 rounded-2xl font-bold shadow-xl">VALIDAR BLOQUE 3-4</button>
         </section>
 
-        <section id="content-tab4" class="hidden relative min-h-[400px]">
-            <div id="locked-view" class="absolute inset-0 z-10 flex flex-col items-center justify-center text-center p-8 bg-gray-800/95 rounded-3xl border border-dashed border-gray-600">
-                <div class="w-20 h-20 bg-gray-700 rounded-full flex items-center justify-center mb-6 shadow-inner">
-                    <i class="fas fa-lock text-3xl text-orange-500"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2">Formación CA2i Bloqueada</h3>
-                <p class="text-gray-400 text-sm max-w-xs leading-relaxed">Alcanza el 40% para desbloquear.</p>
+        <section id="content-tab4" class="hidden relative min-h-[300px]">
+            <div id="locked-view" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-800/90 rounded-2xl border border-dashed">
+                <i class="fas fa-lock text-3xl text-orange-500 mb-4"></i>
+                <p>Alcanza el 40% para desbloquear</p>
             </div>
-            <div id="unlocked-view" class="hidden space-y-6">
-                <div class="bg-gradient-to-br from-blue-900 to-indigo-900 rounded-2xl p-6 border border-blue-400/30 shadow-2xl">
-                    <h2 class="text-xl font-bold mb-4 text-white">Fase CA2i</h2>
-                    <div class="task-item flex items-center p-4 bg-white/10 rounded-xl border border-white/10" onclick="toggleTask(this)">
-                        <i class="far fa-square text-white/50 mr-3 text-lg"></i>
-                        <span class="text-sm font-bold">Argumentario iad</span>
-                    </div>
+            <div id="unlocked-view" class="hidden p-6 bg-blue-900/20 rounded-2xl">
+                <h2 class="text-xl font-bold mb-4">Fase CA2i</h2>
+                <div class="task-item p-4 bg-gray-900 rounded-xl flex items-center" onclick="toggleTask(this)">
+                    <i class="far fa-square text-white/50 mr-3 text-lg"></i>
+                    <span>Argumentario iad</span>
                 </div>
-                <button onclick="showSuccessModal(4)" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-black py-5 rounded-2xl flex items-center justify-center space-x-3 shadow-2xl transition-all active:scale-95">
-                    <i class="fas fa-certificate text-xl"></i>
-                    <span>VALIDAR FORMACIÓN CA2i</span>
-                </button>
+                <button onclick="showSuccessModal(4)" class="w-full bg-blue-700 py-5 rounded-2xl font-bold shadow-xl mt-6">VALIDAR CA2i</button>
             </div>
         </section>
 
-        <section id="content-tab5" class="hidden space-y-8">
-            <div class="text-center p-10 bg-gray-800 rounded-3xl border border-gray-700 shadow-xl">
-                <i class="fas fa-flag-checkered text-5xl text-orange-500 mb-6"></i>
-                <h2 class="text-2xl font-black mb-3 text-white">¡Rumbo al Éxito!</h2>
-                <div class="task-item p-8 gold-card rounded-3xl flex items-center justify-between" onclick="finalValidation(this)">
-                    <div class="flex items-center">
-                        <i class="far fa-square text-blue-900 mr-5 text-3xl"></i>
-                        <span class="font-black text-xl uppercase tracking-tighter">¡MI PRIMERA VENTA! 🏠</span>
-                    </div>
+        <section id="content-tab5" class="hidden space-y-6">
+            <div class="text-center p-10 bg-gray-800 rounded-2xl border border-gray-700 shadow-2xl">
+                <i class="fas fa-flag-checkered text-4xl text-orange-500 mb-4"></i>
+                <h2 class="text-xl font-bold mb-6">¡Rumbo al Éxito!</h2>
+                <div class="task-item p-8 gold-card rounded-2xl flex items-center justify-center font-bold" onclick="finalValidation(this)">
+                    <i class="far fa-square mr-4 text-2xl"></i> ¡MI PRIMERA VENTA! 🏠
                 </div>
             </div>
         </section>
-
     </main>
 
-    <!-- Botón Ayuda -->
-    <a href="https://wa.me/34600000000?text=Hola%20Ana,%20tengo%20una%20duda%20con%20el%20PAi" target="_blank" class="whatsapp-float fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl flex items-center space-x-2 z-50">
+    <!-- WhatsApp -->
+    <a href="https://wa.me/34600000000" target="_blank" class="whatsapp-float fixed bottom-6 right-6 bg-green-500 p-4 rounded-full shadow-2xl z-50">
         <i class="fab fa-whatsapp text-3xl"></i>
     </a>
 
-    <!-- Modal Éxito -->
-    <div id="successModal" class="fixed inset-0 bg-black/95 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-gray-800 rounded-3xl p-10 max-w-md w-full text-center border-2 border-[#FF6600]">
-            <div class="text-7xl mb-6">🚀</div>
-            <h3 class="text-3xl font-black text-[#FF6600] mb-3 uppercase">¡Etapa Validada!</h3>
-            <button onclick="closeModal()" class="w-full bg-[#FF6600] text-white font-black py-5 rounded-2xl uppercase tracking-widest text-sm">CONTINUAR</button>
+    <!-- Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black/90 hidden flex items-center justify-center p-4 z-[100]">
+        <div class="bg-gray-800 p-10 rounded-3xl text-center border-2 border-orange-500 max-w-sm w-full">
+            <div class="text-6xl mb-4">🚀</div>
+            <h3 class="text-2xl font-black text-orange-500 mb-6 uppercase">Etapa Completada</h3>
+            <button onclick="closeModal()" class="w-full bg-orange-500 py-4 rounded-xl font-bold">CONTINUAR</button>
         </div>
     </div>
 
@@ -258,73 +222,57 @@
         const bubbleGrid = document.getElementById('bubbleGrid');
         
         for (let i = 0; i < 50; i++) {
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble w-10 h-10 rounded-full bg-gray-700 border border-gray-600 flex items-center justify-center text-[10px] text-gray-400 font-bold';
-            bubble.id = `bubble-${i}`; 
-            bubble.innerText = i + 1;
-            bubbleGrid.appendChild(bubble);
+            const b = document.createElement('div');
+            b.className = 'bubble w-10 h-10 rounded-full bg-gray-700 border border-gray-600 flex items-center justify-center text-[10px] text-gray-400 font-bold';
+            b.id = `bubble-${i}`; b.innerText = i + 1;
+            bubbleGrid.appendChild(b);
         }
 
-        function toggleTask(element) {
-            element.classList.toggle('task-checked');
-            const icon = element.querySelector('i');
-            icon.className = element.classList.contains('task-checked') 
-                ? 'fas fa-check-square text-green-500 mr-3 text-lg' 
-                : 'far fa-square text-gray-500 mr-3 text-lg';
-            updateOverallProgress();
+        function toggleTask(el) {
+            el.classList.toggle('task-checked');
+            const icon = el.querySelector('i');
+            icon.className = el.classList.contains('task-checked') ? 'fas fa-check-square text-green-500 mr-3 text-lg' : 'far fa-square text-gray-500 mr-3 text-lg';
+            updateProgress();
         }
 
         function addName() {
             const input = document.getElementById('nameInput');
             if (input.value.trim() !== "" && count < 50) {
                 const b = document.getElementById(`bubble-${count}`);
-                b.classList.add('bubble-active', 'text-white');
-                b.innerText = "✓"; 
+                b.classList.add('bubble-active', 'text-white'); b.innerText = "✓";
                 count++;
                 document.getElementById('counter').innerText = `${count}/50`;
-                input.value = ""; 
+                input.value = "";
                 confetti({ particleCount: 30, spread: 50, origin: { y: 0.8 }, colors: ['#FF6600', '#003366'] });
-                updateOverallProgress();
+                updateProgress();
             }
         }
 
-        function changeTab(tabNum) {
+        function changeTab(n) {
             document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
             document.querySelectorAll('nav button').forEach(b => b.classList.replace('tab-active', 'text-gray-500'));
-            document.getElementById('content-tab' + tabNum).classList.remove('hidden');
-            document.getElementById('btn-tab' + tabNum).classList.add('tab-active');
-            activeTab = tabNum; 
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            document.getElementById('content-tab' + n).classList.remove('hidden');
+            document.getElementById('btn-tab' + n).classList.add('tab-active');
+            activeTab = n;
         }
 
-        function updateOverallProgress() {
-            const totalTasks = document.querySelectorAll('.task-item').length;
-            const checkedTasks = document.querySelectorAll('.task-item.task-checked').length;
-            const total = Math.round(((count / 50) * 10) + ((checkedTasks / totalTasks) * 90));
+        function updateProgress() {
+            const tasks = document.querySelectorAll('.task-item').length;
+            const done = document.querySelectorAll('.task-item.task-checked').length;
+            const total = Math.round(((count / 50) * 10) + ((done / tasks) * 90));
             document.getElementById('barra-progreso').style.width = total + '%';
             document.getElementById('progreso-total').innerText = total + '%';
             if (total >= 40) {
-                document.getElementById('locked-view').classList.add('hidden');
-                document.getElementById('unlocked-view').classList.remove('hidden');
+                const locked = document.getElementById('locked-view');
+                const unlocked = document.getElementById('unlocked-view');
+                if(locked) locked.classList.add('hidden');
+                if(unlocked) unlocked.classList.remove('hidden');
             }
         }
 
-        function finalValidation(element) {
-            toggleTask(element);
-            if(element.classList.contains('task-checked')) {
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            }
-        }
-
-        function showSuccessModal(level) { 
-            document.getElementById('successModal').classList.remove('hidden'); 
-            confetti({ particleCount: 100 }); 
-        }
-
-        function closeModal() { 
-            document.getElementById('successModal').classList.add('hidden'); 
-            if(activeTab < 5) changeTab(activeTab + 1); 
-        }
+        function showSuccessModal() { document.getElementById('successModal').classList.remove('hidden'); confetti({ particleCount: 100 }); }
+        function closeModal() { document.getElementById('successModal').classList.add('hidden'); if(activeTab < 5) changeTab(activeTab + 1); }
+        function finalValidation(el) { toggleTask(el); if(el.classList.contains('task-checked')) confetti({ particleCount: 150, spread: 70 }); }
     </script>
 </body>
 </html>
