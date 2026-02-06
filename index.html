@@ -3,103 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Inmobiliaria - Guía Ana</title>
+    <title>iad Academy | Guía de Supervivencia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        body { font-family: sans-serif; background-color: #f0f2f5; margin: 0; display: flex; flex-direction: column; align-items: center; padding-bottom: 80px; }
-        header { width: 100%; max-width: 500px; background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; text-align: center; padding: 25px 0; border-radius: 0 0 20px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .container { width: 90%; max-width: 400px; }
-        .modulo { background: white; border-radius: 15px; margin-bottom: 15px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-left: 8px solid; }
+        :root {
+            --iad-blue: #003366;
+            --iad-orange: #FF6600;
+        }
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .iad-gradient {
+            background: linear-gradient(135deg, var(--iad-blue) 0%, #1e293b 100%);
+        }
+        .bubble {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bubble-active {
+            background-color: var(--iad-orange);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--iad-orange);
+            border-color: white !important;
+        }
+        .tab-active {
+            border-bottom: 4px solid var(--iad-orange);
+            color: var(--iad-orange);
+        }
+        .task-item {
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .task-item:hover {
+            background-color: rgba(255, 102, 0, 0.1);
+        }
+        .task-checked {
+            opacity: 0.6;
+            text-decoration: line-through;
+            border-color: rgba(34, 197, 94, 0.3) !important;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        #m1 { border-left-color: #007bff; }
-        #m2 { border-left-color: #dc3545; }
-        #m3 { border-left-color: #6f42c1; }
-        #m4 { border-left-color: #e83e8c; }
+        .whatsapp-float {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
 
-        h2 { margin-top: 0; font-size: 1.1rem; color: #333; }
-        input { width: 90%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 10px; }
-        .check-item { display: flex; align-items: center; margin: 8px 0; font-size: 0.9rem; }
-        input[type="checkbox"] { margin-right: 10px; transform: scale(1.2); }
-        
-        .btn-send { background-color: #1e3a8a; color: white; border: none; padding: 10px; border-radius: 5px; width: 100%; cursor: pointer; margin-top: 10px; font-weight: bold; }
-        .btn-whatsapp { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; padding: 15px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 1000; }
+        .gold-card {
+            background: linear-gradient(135deg, #b8860b 0%, #ffd700 50%, #b8860b 100%);
+            color: #003366;
+        }
+
+        /* Estilo Logo iad Integrado */
+        .iad-logo-text {
+            font-family: 'Arial Black', sans-serif;
+            letter-spacing: -2px;
+            display: flex;
+            align-items: baseline;
+        }
+        .iad-logo-i {
+            color: var(--iad-orange);
+            font-size: 42px;
+            font-weight: 900;
+        }
+        .iad-logo-ad {
+            color: white;
+            font-size: 38px;
+            font-weight: 900;
+        }
     </style>
 </head>
-<body>
+<body class="pb-24">
 
-    <header>
-        <h1>🏢 ANA & EQUIPO</h1>
-        <p>Guía de Éxito para Nuevos Comerciales</p>
+    <!-- Header Corporativo -->
+    <header class="iad-gradient p-6 sticky top-0 z-40 border-b border-blue-900 shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex flex-col">
+                    <div class="iad-logo-text">
+                        <span class="iad-logo-i">i</span><span class="iad-logo-ad">ad</span>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-[0.4em] text-orange-400 uppercase -mt-2 ml-1">Academy</span>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] uppercase text-blue-300 tracking-widest font-bold">Estado PAi</p>
+                    <p class="text-xl font-black text-[#FF6600]" id="progreso-total">0%</p>
+                </div>
+            </div>
+            <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden border border-blue-900/50">
+                <div id="barra-progreso" class="bg-[#FF6600] h-full transition-all duration-1000 shadow-[0_0_10px_#FF6600]" style="width: 0%;"></div>
+            </div>
+        </div>
     </header>
 
-    <div class="container">
-        <div class="modulo" id="m1">
-            <h2>Módulo 1: Honorarios</h2>
-            <input type="number" id="precio" placeholder="Precio de venta (€)" oninput="calcular()">
-            <div id="resHonorarios" style="font-weight:bold; color:#007bff; margin-bottom:10px;">Comisión (5%): 0€</div>
-            <button class="btn-send" onclick="enviarM1()">Enviar Cálculo a Ana</button>
-        </div>
+    <main class="max-w-4xl mx-auto p-4 space-y-8">
+        
+        <!-- Navegación por Semanas -->
+        <nav class="flex overflow-x-auto border-b border-gray-700 no-scrollbar space-x-6 text-sm font-bold uppercase py-2">
+            <button onclick="changeTab(1)" id="btn-tab1" class="tab-active whitespace-nowrap pb-2">🚀 Semana 1</button>
+            <button onclick="changeTab(2)" id="btn-tab2" class="whitespace-nowrap pb-2 text-gray-500">🛡️ Semana 2</button>
+            <button onclick="changeTab(3)" id="btn-tab3" class="whitespace-nowrap pb-2 text-gray-500">🔍 Semanas 3-4</button>
+            <button onclick="changeTab(4)" id="btn-tab4" class="whitespace-nowrap pb-2 text-gray-500">🤝 Semanas 5-6</button>
+            <button onclick="changeTab(5)" id="btn-tab5" class="whitespace-nowrap pb-2 text-gray-500">🏆 Mes 6</button>
+        </nav>
 
-        <div class="modulo" id="m2">
-            <h2>Módulo 2: Valoración (ACM)</h2>
-            <input type="number" id="v1" placeholder="Ref. Vendido 1 (€)">
-            <input type="number" id="v2" placeholder="Ref. Vendido 2 (€)">
-            <button class="btn-send" onclick="enviarM2()">Enviar Valoración a Ana</button>
-        </div>
+        <!-- CONTENIDO SEMANA 1 -->
+        <section id="content-tab1" class="space-y-6">
+            <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-xl">
+                <h2 class="text-xl font-bold mb-4 flex items-center text-orange-400">
+                    <i class="fas fa-list-check mr-3"></i> Tareas de Integración
+                </h2>
+                <div class="grid gap-3" id="taskListS1">
+                    <div class="task-item flex items-center p-3 bg-gray-900/50 rounded-xl border border-gray-700" onclick="toggleTask(this)">
+                        <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
+                        <span class="text-sm italic">Acoger entorno a un café</span>
+                    </div>
+                    <div class="task-item flex items-center p-3 bg-gray-900/50 rounded-xl border border-gray-700" onclick="toggleTask(this)">
+                        <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
+                        <span class="text-sm">Presentar el equipo local</span>
+                    </div>
+                    <div class="task-item flex items-center p-3 bg-gray-900/50 rounded-xl border border-gray-700" onclick="toggleTask(this)">
+                        <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
+                        <span class="text-sm">Detallar y explicar Código Deontológico</span>
+                    </div>
+                    <div class="task-item flex items-center p-3 bg-gray-900/50 rounded-xl border border-gray-700" onclick="toggleTask(this)">
+                        <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
+                        <span class="text-sm font-bold text-orange-400">iad Shop: Pedir Welcome Pack</span>
+                    </div>
+                </div>
+            </div>
 
-        <div class="modulo" id="m3">
-            <h2>Módulo 3: Marketing</h2>
-            <div class="check-item"><input type="checkbox" id="foto1"> Persianas abiertas</div>
-            <div class="check-item"><input type="checkbox" id="foto2"> Tapas WC bajadas</div>
-            <div class="check-item"><input type="checkbox" id="foto3"> Camas impecables</div>
-            <button class="btn-send" onclick="enviarM3()">Enviar Checklist a Ana</button>
-        </div>
+            <!-- Lista Cálida -->
+            <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-blue-400">Lista Cálida (50 Aliados)</h2>
+                    <span class="bg-blue-900 text-blue-200 px-3 py-1 rounded-full text-xs font-bold" id="counter">0/50</span>
+                </div>
+                <div class="flex space-x-2 mb-6">
+                    <input type="text" id="nameInput" placeholder="Nombre del contacto..." class="flex-1 bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-[#FF6600] text-white">
+                    <button onclick="addName()" class="bg-[#FF6600] text-white px-6 rounded-xl font-black hover:scale-105 transition shadow-lg">OK</button>
+                </div>
+                <div class="grid grid-cols-5 sm:grid-cols-10 gap-2" id="bubbleGrid"></div>
+            </div>
 
-        <div class="modulo" id="m4">
-            <h2>Módulo 4: Filtro de Cliente</h2>
-            <input type="text" id="nombreC" placeholder="Nombre del cliente">
-            <div class="check-item"><input type="checkbox" id="f1"> ¿Financiación OK?</div>
-            <div class="check-item"><input type="checkbox" id="f2"> ¿Vende para comprar?</div>
-            <button class="btn-send" onclick="enviarM4()">Enviar Filtro a Ana</button>
+            <button onclick="showSuccessModal(1)" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-black py-5 rounded-2xl flex items-center justify-center space-x-3 shadow-2xl transition-all active:scale-95">
+                <i class="fas fa-certificate text-xl"></i>
+                <span>VALIDAR SEMANA 1</span>
+            </button>
+        </section>
+
+        <!-- SECCIÓN 2 (Phoning) -->
+        <section id="content-tab2" class="hidden space-y-6">
+             <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-xl">
+                <h2 class="text-xl font-bold mb-4 flex items-center text-blue-400">
+                    <i class="fas fa-phone-volume mr-3"></i> Semana 2: Phoning P2i
+                </h2>
+                <div class="space-y-3">
+                    <div class="task-item flex items-center p-4 bg-gray-900 rounded-xl border-l-4 border-orange-500" onclick="toggleTask(this)">
+                        <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
+                        <div>
+                            <p class="font-bold text-sm text-orange-400">Sesión de Phoning P2i</p>
+                            <p class="text-xs text-gray-400 italic">Primeras llamadas acompañadas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button onclick="showSuccessModal(2)" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-black py-5 rounded-2xl flex items-center justify-center space-x-3 shadow-2xl transition-all active:scale-95">
+                <i class="fas fa-certificate text-xl"></i>
+                <span>VALIDAR SEMANA 2</span>
+            </button>
+        </section>
+
+        <!-- SECCIÓN 3 (Herramientas) -->
+        <section id="content-tab3" class="hidden space-y-6">
+            <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 shadow-xl">
+                <h2 class="text-xl font-bold mb-4 flex items-center text-purple-400">
+                    <i class="fas fa-search-location mr-3"></i> Semanas 3-4: Herramientas
+                </h2>
+                <div class="grid gap-3">
+                    <div class="task-item p-3 bg-gray-900 rounded-xl border border-gray-700 flex items-center" onclick="toggleTask(this)">
+                        <i class="far fa-square text-gray-500 mr-3 text-lg"></i>
+                        <span class="text-sm font-bold">Herramienta A2C (Valoración)</span>
+                    </div>
+                </div>
+            </div>
+            <button onclick="showSuccessModal(3)" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-black py-5 rounded-2xl flex items-center justify-center space-x-3 shadow-2xl transition-all active:scale-95">
+                <i class="fas fa-certificate text-xl"></i>
+                <span>VALIDAR BLOQUE 3-4</span>
+            </button>
+        </section>
+
+        <!-- SECCIÓN 4 (Bloqueada por progreso) -->
+        <section id="content-tab4" class="hidden relative min-h-[400px]">
+            <div id="locked-view" class="absolute inset-0 z-10 flex flex-col items-center justify-center text-center p-8 bg-gray-800/95 rounded-3xl border border-dashed border-gray-600">
+                <div class="w-20 h-20 bg-gray-700 rounded-full flex items-center justify-center mb-6 shadow-inner">
+                    <i class="fas fa-lock text-3xl text-orange-500"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Formación CA2i Bloqueada</h3>
+                <p class="text-gray-400 text-sm max-w-xs leading-relaxed">Alcanza el 40% para desbloquear.</p>
+            </div>
+            <div id="unlocked-view" class="hidden space-y-6">
+                <div class="bg-gradient-to-br from-blue-900 to-indigo-900 rounded-2xl p-6 border border-blue-400/30 shadow-2xl">
+                    <h2 class="text-xl font-bold mb-4 text-white">Fase CA2i</h2>
+                    <div class="task-item flex items-center p-4 bg-white/10 rounded-xl border border-white/10" onclick="toggleTask(this)">
+                        <i class="far fa-square text-white/50 mr-3 text-lg"></i>
+                        <span class="text-sm font-bold">Argumentario iad</span>
+                    </div>
+                </div>
+                <button onclick="showSuccessModal(4)" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-black py-5 rounded-2xl flex items-center justify-center space-x-3 shadow-2xl transition-all active:scale-95">
+                    <i class="fas fa-certificate text-xl"></i>
+                    <span>VALIDAR FORMACIÓN CA2i</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5 (Final) -->
+        <section id="content-tab5" class="hidden space-y-8">
+            <div class="text-center p-10 bg-gray-800 rounded-3xl border border-gray-700 shadow-xl">
+                <i class="fas fa-flag-checkered text-5xl text-orange-500 mb-6"></i>
+                <h2 class="text-2xl font-black mb-3 text-white">¡Rumbo al Éxito!</h2>
+                <div class="task-item p-8 gold-card rounded-3xl flex items-center justify-between" onclick="finalValidation(this)">
+                    <div class="flex items-center">
+                        <i class="far fa-square text-blue-900 mr-5 text-3xl"></i>
+                        <span class="font-black text-xl uppercase tracking-tighter">¡MI PRIMERA VENTA! 🏠</span>
+                    </div>
+                </div>
+            </div>
+            <div id="final-achievement" class="hidden bg-blue-900/40 p-8 rounded-3xl border border-yellow-500/50 text-center animate-bounce">
+                 <p class="text-yellow-400 font-black mb-2 text-lg tracking-widest">🏆 GRADUADO iad</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Botón de Contacto con Ana -->
+    <a href="https://wa.me/34600000000?text=%C2%A1Hola%20Ana!%20Te%20escribo%20porque%20me%20ha%20surgido%20una%20duda%20con%20la%20APP%20y%20he%20pensado%20que%20t%C3%BA%20sabr%C3%ADas%20orientarme%20un%20poco...%20%C2%A1Mil%20gracias!" target="_blank" class="whatsapp-float fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl flex items-center space-x-2 z-50 group">
+        <i class="fab fa-whatsapp text-3xl"></i>
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-in-out whitespace-nowrap font-black uppercase text-xs">Ayuda de Ana</span>
+    </a>
+
+    <!-- Modal de Validación -->
+    <div id="successModal" class="fixed inset-0 bg-black/95 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-gray-800 rounded-3xl p-10 max-w-md w-full text-center border-2 border-[#FF6600] shadow-[0_0_50px_rgba(255,102,0,0.3)]">
+            <div class="text-7xl mb-6" id="modalEmoji">🚀</div>
+            <h3 class="text-3xl font-black text-[#FF6600] mb-3 uppercase tracking-tighter" id="modalTitle">¡Etapa Validada!</h3>
+            <button onclick="closeModal()" class="w-full bg-[#FF6600] text-white font-black py-5 rounded-2xl uppercase tracking-widest text-sm">CONTINUAR</button>
         </div>
     </div>
 
-    <a href="#" class="btn-whatsapp" id="ws-link">💬 Contactar con Ana</a>
-
     <script>
-        // ¡IMPORTANTE! Cambia esto por el número de Ana (ej: 34600112233)
-        const TEL_ANA = "34600000000"; 
-        document.getElementById('ws-link').href = "https://wa.me/" + TEL_ANA;
-
-        function calcular() {
-            let p = document.getElementById('precio').value;
-            document.getElementById('resHonorarios').innerText = "Comisión (5%): " + (p * 0.05).toLocaleString() + "€";
+        let count = 0; 
+        let activeTab = 1;
+        
+        // Generar burbujas de la lista
+        const bubbleGrid = document.getElementById('bubbleGrid');
+        for (let i = 0; i < 50; i++) {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble w-10 h-10 rounded-full bg-gray-700 border border-gray-600 flex items-center justify-center text-[10px] text-gray-400 font-bold';
+            bubble.id = `bubble-${i}`; 
+            bubble.innerText = i + 1;
+            bubbleGrid.appendChild(bubble);
         }
 
-        function enviarM1() {
-            let p = document.getElementById('precio').value;
-            let h = p * 0.05;
-            window.open(`https://wa.me/${TEL_ANA}?text=Hola Ana! Cálculo de Honorarios:%0A- Precio: ${p}€%0A- Comisión: ${h}€`);
+        function toggleTask(element) {
+            if (!element) return;
+            element.classList.toggle('task-checked');
+            const icon = element.querySelector('i.far.fa-square, i.fas.fa-check-square');
+            if (icon) {
+                icon.className = element.classList.contains('task-checked') 
+                    ? 'fas fa-check-square text-green-500 mr-3 text-lg' 
+                    : 'far fa-square text-gray-500 mr-3 text-lg';
+            }
+            updateOverallProgress();
         }
 
-        function enviarM2() {
-            let v1 = document.getElementById('v1').value;
-            let v2 = document.getElementById('v2').value;
-            window.open(`https://wa.me/${TEL_ANA}?text=Hola Ana! Aquí mi Valoración ACM:%0A- Ref1: ${v1}€%0A- Ref2: ${v2}€`);
+        function addName() {
+            const input = document.getElementById('nameInput');
+            if (input.value.trim() !== "" && count < 50) {
+                const b = document.getElementById(`bubble-${count}`);
+                if (b) {
+                    b.classList.add('bubble-active', 'text-white');
+                    b.innerText = "✓"; 
+                    count++;
+                    document.getElementById('counter').innerText = `${count}/50`;
+                    input.value = ""; 
+                    input.focus();
+                    confetti({ 
+                        particleCount: 30, 
+                        spread: 50, 
+                        origin: { y: 0.8 }, 
+                        colors: ['#FF6600', '#003366'] 
+                    });
+                    updateOverallProgress();
+                }
+            }
         }
 
-        function enviarM3() {
-            let c1 = document.getElementById('foto1').checked ? "✅" : "❌";
-            let c2 = document.getElementById('foto2').checked ? "✅" : "❌";
-            let c3 = document.getElementById('foto3').checked ? "✅" : "❌";
-            window.open(`https://wa.me/${TEL_ANA}?text=Hola Ana! Checklist de Marketing listo:%0A- Persianas: ${c1}%0A- WC: ${c2}%0A- Camas: ${c3}`);
+        function changeTab(tabNum) {
+            document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.replace('tab-active', 'text-gray-500'));
+            document.getElementById('content-tab' + tabNum).classList.remove('hidden');
+            document.getElementById('btn-tab' + tabNum).classList.add('tab-active');
+            activeTab = tabNum; 
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        function enviarM4() {
-            let n = document.getElementById('nombreC').value;
-            let f1 = document.getElementById('f1').checked ? "SÍ" : "NO";
-            let f2 = document.getElementById('f2').checked ? "SÍ" : "NO";
-            window.open(`https://wa.me/${TEL_ANA}?text=Hola Ana! Filtro del cliente ${n}:%0A- Financiación: ${f1}%0A- Vende para comprar: ${f2}`);
+        function updateOverallProgress() {
+            const totalTasks = document.querySelectorAll('.task-item').length;
+            const checkedTasks = document.querySelectorAll('.task-item.task-checked').length;
+            const total = Math.round(((count / 50) * 10) + ((checkedTasks / totalTasks) * 90));
+            document.getElementById('barra-progreso').style.width = total + '%';
+            document.getElementById('progreso-total').innerText = total + '%';
+            
+            if (total >= 40) {
+                document.getElementById('locked-view').classList.add('hidden');
+                document.getElementById('unlocked-view').classList.remove('hidden');
+            }
         }
+
+        function finalValidation(element) {
+            toggleTask(element);
+            if(element.classList.contains('task-checked')) {
+                document.getElementById('final-achievement').classList.remove('hidden');
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            }
+        }
+
+        function showSuccessModal(level) { 
+            document.getElementById('successModal').classList.remove('hidden'); 
+            confetti({ particleCount: 100 }); 
+        }
+
+        function closeModal() { 
+            document.getElementById('successModal').classList.add('hidden'); 
+            if(activeTab < 5) changeTab(activeTab + 1); 
+        }
+
+        document.getElementById('nameInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addName();
+        });
     </script>
 </body>
 </html>
